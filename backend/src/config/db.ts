@@ -6,7 +6,7 @@ export const connectDB = async (): Promise<void> => {
   }
 
   try {
-    const mongoURI = process.env.MONGO_URI || "mongodb+srv://thiruselvan:thiru%40mongo@thiru.wsm7p8e.mongodb.net/expense_tracker?appName=thiru";
+    const mongoURI = process.env.MONGO_URI || " ";
     await mongoose.connect(mongoURI);
     console.log('MongoDB Connected successfully.');
   } catch (error) {
