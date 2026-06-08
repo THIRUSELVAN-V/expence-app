@@ -101,7 +101,7 @@ export const autoCategorize = (itemName: string): string => {
 
 // Middleware to auto-populate category before validation
 ExpenseSchema.pre('validate', function (next) {
-  const expense = this as IExpense;
+  const expense = this as unknown as IExpense;
   if (!expense.category) {
     expense.category = autoCategorize(expense.item);
   }
