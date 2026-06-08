@@ -8,9 +8,11 @@ import ExpenseTable from '@/components/ExpenseTable';
 import ExpenseForm from '@/components/ExpenseForm';
 import BulkImport from '@/components/BulkImport';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL 
-  ? `${process.env.NEXT_PUBLIC_API_URL}/api/expenses` 
-  : 'http://localhost:5000/api/expenses';
+const cleanApiUrl = process.env.NEXT_PUBLIC_API_URL 
+  ? process.env.NEXT_PUBLIC_API_URL.replace(/\/+$/, '') 
+  : 'http://localhost:5000';
+
+const API_BASE_URL = `${cleanApiUrl}/api/expenses`;
 
 interface Expense {
   _id?: string;
