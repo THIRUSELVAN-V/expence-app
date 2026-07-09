@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect, @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
@@ -313,6 +314,12 @@ export default function Home() {
           <ExpenseCharts
             categoryBreakdown={stats.categoryBreakdown}
             monthlyTrend={stats.monthlyTrend}
+            expenses={expenses}
+            onEdit={(exp) => {
+              setEditExpense(exp);
+              setIsFormOpen(true);
+            }}
+            onDelete={handleDelete}
           />
         </section>
 

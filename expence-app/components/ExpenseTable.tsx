@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Edit2, Trash2, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, HelpCircle, Eye } from 'lucide-react';
+import { Edit2, Trash2, ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Eye } from 'lucide-react';
 
 interface Expense {
   _id?: string;
@@ -51,8 +51,8 @@ export default function ExpenseTable({ expenses, onEdit, onDelete, loading }: Ex
 
   // Sort expenses
   const sortedExpenses = [...expenses].sort((a, b) => {
-    let valA = a[sortField];
-    let valB = b[sortField];
+    const valA = a[sortField];
+    const valB = b[sortField];
 
     if (sortField === 'sNo') {
       const numA = valA !== undefined ? (valA as number) : -1;
@@ -80,7 +80,7 @@ export default function ExpenseTable({ expenses, onEdit, onDelete, loading }: Ex
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedExpenses = sortedExpenses.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  const SortIcon = ({ field }: { field: SortField }) => {
+  const renderSortIcon = (field: SortField) => {
     if (sortField !== field) return null;
     return sortOrder === 'asc' ? <ChevronUp className="ml-1 h-3.5 w-3.5" /> : <ChevronDown className="ml-1 h-3.5 w-3.5" />;
   };
@@ -96,31 +96,31 @@ export default function ExpenseTable({ expenses, onEdit, onDelete, loading }: Ex
                 onClick={() => handleSort('sNo')}
                 className="p-4 cursor-pointer select-none transition hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50 font-mono w-16"
               >
-                <div className="flex items-center">S.No <SortIcon field="sNo" /></div>
+                <div className="flex items-center">S.No {renderSortIcon('sNo')}</div>
               </th>
               <th
                 onClick={() => handleSort('date')}
                 className="p-4 cursor-pointer select-none transition hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50"
               >
-                <div className="flex items-center">Date <SortIcon field="date" /></div>
+                <div className="flex items-center">Date {renderSortIcon('date')}</div>
               </th>
               <th
                 onClick={() => handleSort('item')}
                 className="p-4 cursor-pointer select-none transition hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50"
               >
-                <div className="flex items-center">Item <SortIcon field="item" /></div>
+                <div className="flex items-center">Item {renderSortIcon('item')}</div>
               </th>
               <th
                 onClick={() => handleSort('category')}
                 className="p-4 cursor-pointer select-none transition hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50"
               >
-                <div className="flex items-center">Category <SortIcon field="category" /></div>
+                <div className="flex items-center">Category {renderSortIcon('category')}</div>
               </th>
               <th
                 onClick={() => handleSort('amount')}
                 className="p-4 cursor-pointer select-none text-right transition hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50"
               >
-                <div className="flex items-center justify-end">Amount <SortIcon field="amount" /></div>
+                <div className="flex items-center justify-end">Amount {renderSortIcon('amount')}</div>
               </th>
               <th className="p-4 text-center">Actions</th>
             </tr>
